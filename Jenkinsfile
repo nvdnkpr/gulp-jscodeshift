@@ -55,6 +55,8 @@ node {
 
     checkout scm
 
+    echo 'TEST'
+
     // Read meta info from package.json
     def packageFile = readFile('package.json')
     packageJson = parseJson(packageFile)
