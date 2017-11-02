@@ -1,0 +1,22 @@
+{
+  "name": "gulp-jscodeshift",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "keywords": [],
+  "author": "Navid Nikpour <navid@nikpour.com>",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-copy": "^1.0.1",
+    "jscodeshift": "^0.3.32",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp-nodeunit": "^0.1.0"
+  }
+}
