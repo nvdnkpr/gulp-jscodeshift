@@ -42,7 +42,7 @@ node {
         def configFile = readFile(config)
         def configJson = parseJson(configFile)
 
-        injectConfigIntoEnv(configJson, "${json.env-prefix}_${v.replace('-','_')}")
+        injectConfigIntoEnv(configJson, "${json.env_prefix}_${v.replace('-','_')}")
       }
   }
 
