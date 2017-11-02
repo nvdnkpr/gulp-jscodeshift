@@ -10,7 +10,7 @@ injectConfigIntoEnv = {map, prefix = '' ->
         env[envKey] = v
         break
       case java.util.Array:
-        v.eachWithIndex{ v2, i -> env[${envKey}_${i}] = v2 }
+        v.eachWithIndex{ v2, i -> env["${envKey}_${i}"] = v2 }
         break;
       default:
         injectConfigIntoEnv(v, envKey)
