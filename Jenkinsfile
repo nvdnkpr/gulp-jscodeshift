@@ -55,7 +55,6 @@ node {
 
     checkout scm
 
-    echo 'TEST'
 
     // Read meta info from package.json
     def packageFile = readFile('package.json')
@@ -64,6 +63,11 @@ node {
     env.MODULE_TYPE = packageJson.moduleType ?: 'npm'
     env.PROJECT_NAME = packageJson.name
     env.PROJECT_VERSION = packageJson.version
+
+    echo env.MODULE_TYPE
+    echo env.PROJECT_NAME
+    echo env.PROJECT_VERSION
+
     /* TODO: if package.json's script property has certain properties needed for integration tests */
 
     def steps, pipeline
