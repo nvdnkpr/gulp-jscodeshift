@@ -1,26 +1,34 @@
 #!/usr/bin/env groovy
 
+#!/usr/bin/env groovy
+
+import groovy.json.JsonSlurperClassic
+
+@NonCPS
+def parseJson(String jsonText){
+  final slurper = new JsonSlurperClassic()
+  return new HashMap<>(slurper.parseText(jsonText))
+}
+
 def injectConfigIntoEnv
 injectConfigIntoEnv = {map, prefix = '' ->
   map.each { k, v ->
-    def envKey = "${prefix.toUpperCase()}_${k.toUpperCase()}"
-
+    def envKey = "${prefix.toUpperCase()}_${k.toUpperCase()}" 
     switch(v){
-      case String:
-        env[envKey] = v
-        break
-      case java.util.Array:
-        v.eachWithIndex{ v2, i -> env["${envKey}_${i}"] = v2 }
-        break;
-      default:
-        injectConfigIntoEnv(v, envKey)
+        case String:
+            env[envKey] = v
+            break
+        case java.util.ArrayList:
+            v.eachWithIndex{v2, i -> env["${envKey}_${i}"] = v2 }
+            break
+        default:
+            injectConfigIntoEnv(v, "${prefix}_${k}")
     }
   }
 }
 
 
 node {
-  // load main config
   def json
   configFileProvider([configFile(fileId: 'main', variable: 'mainConfig')]) {
     def config = readFile(mainConfig)
@@ -28,7 +36,7 @@ node {
     
     injectConfigIntoEnv(json,json.env_prefix)
   }
-
+  
   // load different stage configs
   json.configfiles.each {
     k, v ->
@@ -36,9 +44,11 @@ node {
         def configFile = readFile(config)
         def configJson = parseJson(configFile)
 
-        injectConfigIntoEnv(configJson, json.env_prefix+"_"+v.replace('-','_'))
+        injectConfigIntoEnv(configJson, "${json.env-prefix}_${v.replace('-','_')}")
       }
   }
+
+  echo sh(returnStdout: true, script: 'env|sort')
 
   try {
     // Cleanup local checkout
