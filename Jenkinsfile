@@ -72,31 +72,31 @@ node {
       pipeline = fileLoader.load("${env.MODULE_TYPE}.groovy")
       utils = fileLoader.load("utils.groovy")
 
-      stage 'prepare'{
+      stage('prepare') {
         pipeline.prepare(steps, utils)
       }
       
-      stage 'compile'{
+      stage('compile') {
         pipeline.compile(steps, utils)
       }
       
-      stage 'unit tests'{
+      stage('unit tests'){
         pipeline.unitTests(steps, utils)
       }
       
-      stage 'integration test'{
+      stage('integration test'){
         pipeline.integrationTests(steps, utils)
       }
       
-      stage 'code Analysis'{
+      stage('code Analysis'){
         pipeline.codeAnalysis(steps, utils)
       }
       
-      stage 'dist Assembly'{
+      stage('dist Assembly'){
         pipeline.assembleDist(steps, utils)
       }
       
-      stage 'publish dist'{
+      stage('publish dist'){
         pipeline.publishBinaries(steps, utils)
       }
     }
