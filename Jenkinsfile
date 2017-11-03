@@ -70,33 +70,34 @@ node {
     fileLoader.withGit(env.VDMS_JENKINSFILE_REPOSITORY, env.VDMS_JENKINSFILE_BRANCH, env.VDMS_CREDENTIALS_GIT_PROVIDER, '') {
       steps = fileLoader.load(env.VDMS_STEPS_FILE)
       pipeline = fileLoader.load("${env.MODULE_TYPE}.groovy")
+      utils = fileLoader.load("utils.groovy")
 
-      stage 'Prepare'{
-        pipeline.prepare(steps)
+      stage 'prepare'{
+        pipeline.prepare(steps, utils)
       }
       
-      stage 'Compile'{
-        pipeline.compile(steps)
+      stage 'compile'{
+        pipeline.compile(steps, utils)
       }
       
-      stage 'Unit tests'{
-        pipeline.unitTests(steps)
+      stage 'unit tests'{
+        pipeline.unitTests(steps, utils)
       }
       
-      stage 'Integration test'{
-        pipeline.integrationTests(steps)
+      stage 'integration test'{
+        pipeline.integrationTests(steps, utils)
       }
       
-      stage 'Code Analysis'{
-        pipeline.codeAnalysis(steps)
+      stage 'code Analysis'{
+        pipeline.codeAnalysis(steps, utils)
       }
       
-      stage 'Dist Assembly'{
-        pipeline.assembleDist(steps)
+      stage 'dist Assembly'{
+        pipeline.assembleDist(steps, utils)
       }
       
-      stage 'Publish Dist'{
-        pipeline.publishBinaries(steps)
+      stage 'publish dist'{
+        pipeline.publishBinaries(steps, utils)
       }
     }
   }
