@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "build": "tsc -p tsconfig.json",
+        "build": "gulp clean && tsc -p tsconfig.json",
         "test": "gulp test"
     },
     "keywords": [],
