@@ -71,26 +71,33 @@ node {
       steps = fileLoader.load(env.VDMS_STEPS_FILE)
       pipeline = fileLoader.load("${env.MODULE_TYPE}.groovy")
 
-      stage 'Prepare'
-      pipeline.prepare(steps)
-
-      stage 'Compile'
-      pipeline.compile(steps)
-
-      stage 'Unit tests'
-      pipeline.unitTests(steps)
-
-      stage 'Integration test'
-      pipeline.integrationTests(steps)
-
-      stage 'Code Analysis'
-      pipeline.codeAnalysis(steps)
-
-      stage 'Dist Assembly'
-      pipeline.assembleDist(steps)
-
-      stage 'Publish Dist'
-      pipeline.publishBinaries(steps)
+      stage 'Prepare'{
+        pipeline.prepare(steps)
+      }
+      
+      stage 'Compile'{
+        pipeline.compile(steps)
+      }
+      
+      stage 'Unit tests'{
+        pipeline.unitTests(steps)
+      }
+      
+      stage 'Integration test'{
+        pipeline.integrationTests(steps)
+      }
+      
+      stage 'Code Analysis'{
+        pipeline.codeAnalysis(steps)
+      }
+      
+      stage 'Dist Assembly'{
+        pipeline.assembleDist(steps)
+      }
+      
+      stage 'Publish Dist'{
+        pipeline.publishBinaries(steps)
+      }
     }
   }
   catch (any) {
