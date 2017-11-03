@@ -57,6 +57,7 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 ### Node template
+# 
 # Logs
 logs
 *.log
@@ -115,5 +116,8 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# generated lib files
+lib
 
 
