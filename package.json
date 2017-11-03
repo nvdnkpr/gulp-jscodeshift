@@ -1,22 +1,29 @@
 {
-  "name": "gulp-jscodeshift",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "gulp test"
-  },
-  "keywords": [],
-  "author": "Navid Nikpour <navid@nikpour.com>",
-  "license": "ISC",
-  "dependencies": {
-    "gulp": "^3.9.1",
-    "gulp-copy": "^1.0.1",
-    "jscodeshift": "^0.3.32",
-    "lodash": "^4.17.4"
-  },
-  "devDependencies": {
-    "del": "^3.0.0",
-    "gulp-nodeunit": "^0.1.0"
-  }
+    "name": "gulp-jscodeshift",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc -p tsconfig",
+        "test": "gulp test"
+    },
+    "keywords": [],
+    "author": "Navid Nikpour <navid@nikpour.com>",
+    "license": "ISC",
+    "dependencies": {
+        "@types/gulp": "^4.0.5",
+        "@types/gulp-util": "^3.0.33",
+        "@types/lodash": "^4.14.80",
+        "@types/node": "^8.0.47",
+        "@types/through2": "^2.0.33",
+        "gulp": "^3.9.1",
+        "gulp-copy": "^1.0.1",
+        "jscodeshift": "^0.3.32",
+        "lodash": "^4.17.4",
+        "typescript": "^2.6.1"
+    },
+    "devDependencies": {
+        "del": "^3.0.0",
+        "gulp-nodeunit": "^0.1.0"
+    }
 }
