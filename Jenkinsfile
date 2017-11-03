@@ -42,11 +42,9 @@ node {
         def configFile = readFile(config)
         def configJson = parseJson(configFile)
 
-        injectConfigIntoEnv(configJson, "${json.env_prefix}_${v.replace('-','_')}")
+        injectConfigIntoEnv(configJson, "${v.replace('-','_')}")
       }
   }
-
-  echo sh(returnStdout: true, script: 'env|sort')
 
   try {
     // Cleanup local checkout
