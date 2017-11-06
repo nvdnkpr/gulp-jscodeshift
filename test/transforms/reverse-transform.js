@@ -1,4 +1,4 @@
-module.exports = function transformer(file, api) {
+module.exports = function(file, api) {
     const j = api.jscodeshift;
 
     return j(file.source)
