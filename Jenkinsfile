@@ -32,7 +32,7 @@ node {
     def config = readFile(mainConfig)
     json = parseJson(config)
     
-    injectConfigIntoEnv(json,json.env_prefix)
+    injectConfigIntoEnv(json,'main')
   }
   
   // load different stage configs
@@ -67,38 +67,38 @@ node {
     /* TODO: if package.json's script property has certain properties needed for integration tests */
 
     def steps, pipeline
-    fileLoader.withGit(env.VDMS_JENKINSFILE_REPOSITORY, env.VDMS_JENKINSFILE_BRANCH, env.VDMS_CREDENTIALS_GIT_PROVIDER, '') {
-      steps = fileLoader.load(env.VDMS_STEPS_FILE)
+    fileLoader.withGit(env.MAIN_JENKINSFILE_REPOSITORY, env.MAIN_JENKINSFILE_BRANCH, env.MAIN_CREDENTIALS_GIT_PROVIDER, '') {
+      steps = fileLoader.load(env.MAIN_STEPS_FILE)
       pipeline = fileLoader.load("${env.MODULE_TYPE}.groovy")
-      utils = fileLoader.load("utils.groovy")
-
-      stage('prepare') {
+      utils = fileLoader.load(env.MAIN_UTILS_FILE)
+    }
+    
+    stage('prepare') {
         pipeline.prepare(steps, utils)
-      }
+    }
       
-      stage('compile') {
+    stage('compile') {
         pipeline.compile(steps, utils)
-      }
+    }
       
-      stage('unit tests'){
+    stage('unit tests'){
         pipeline.unitTests(steps, utils)
-      }
+    }
       
-      stage('integration test'){
+    stage('integration test'){
         pipeline.integrationTests(steps, utils)
-      }
+    }
       
-      stage('code Analysis'){
+    stage('code Analysis'){
         pipeline.codeAnalysis(steps, utils)
-      }
+    }
       
-      stage('dist Assembly'){
+    stage('dist Assembly'){
         pipeline.assembleDist(steps, utils)
-      }
+    }
       
-      stage('publish dist'){
+    stage('publish dist'){
         pipeline.publishBinaries(steps, utils)
-      }
     }
   }
   catch (any) {
