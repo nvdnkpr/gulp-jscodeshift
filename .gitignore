@@ -118,6 +118,9 @@ typings/
 .env
 
 # generated lib files
-lib
+/lib
+
+/index.js
+/index.js*
 
 
