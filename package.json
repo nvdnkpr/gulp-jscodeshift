@@ -18,12 +18,10 @@
         "@types/node": "^8.0.47",
         "@types/through2": "^2.0.33",
         "gulp": "^3.9.1",
-        "gulp-copy": "^1.0.1",
         "jscodeshift": "^0.3.32",
         "lodash": "^4.17.4",
         "del": "^3.0.0",
         "typescript": "^2.6.1"
     },
-        "gulp-nodeunit": "^0.1.0"
     }
 }
