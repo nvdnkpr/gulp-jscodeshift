@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "build": "gulp clean && tsc -p tsconfig.json",
-        "test": "gulp test"
+        "test": "nyc mocha --require babel-register test/**/*.spec.js"
     },
     "keywords": [],
     "author": "Navid Nikpour <navid@nikpour.com>",
