@@ -29,8 +29,39 @@
         "chai": "^4.1.2",
         "del": "^3.0.0",
         "mocha": "^4.0.1",
+        "nyc": "^11.3.0",
         "sinon-chai": "^2.14.0",
         "typescript": "^2.6.1"
     },
+    "nyc": {
+        "check-coverage": true,
+        "per-file": true,
+        "watermarks": {
+            "lines": [
+                80,
+                95
+            ],
+            "statements": [
+                80,
+                95
+            ],
+            "functions": [
+                80,
+                95
+            ],
+            "branches": [
+                80,
+                95
+            ]
+        },
+        "reporter": [
+            "lcov",
+            "html",
+            "text-summary"
+        ],
+        "exclude": [
+            "**/*.spec.js",
+            "dist"
+        ]
     }
 }
