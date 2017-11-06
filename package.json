@@ -11,6 +11,7 @@
     "author": "Navid Nikpour <navid@nikpour.com>",
     "license": "ISC",
     "dependencies": {
+    "devDependencies": {
         "@types/gulp": "^4.0.5",
         "@types/gulp-util": "^3.0.33",
         "@types/lodash": "^4.14.80",
@@ -20,10 +21,9 @@
         "gulp-copy": "^1.0.1",
         "jscodeshift": "^0.3.32",
         "lodash": "^4.17.4",
+        "del": "^3.0.0",
         "typescript": "^2.6.1"
     },
-    "devDependencies": {
-        "del": "^3.0.0",
         "gulp-nodeunit": "^0.1.0"
     }
 }
