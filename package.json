@@ -3,6 +3,9 @@
     "version": "0.1.0",
     "description": "",
     "main": "index.js",
+    "publishConfig": {
+        "registry": "http://172.17.0.3:8081/repository/vmt-internal"
+    },
     "scripts": {
         "serve:coverage": "live-server --port=1234 coverage",
         "build": "gulp clean && tsc -p tsconfig.json",
