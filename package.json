@@ -4,13 +4,12 @@
     "description": "",
     "main": "index.js",
     "publishConfig": {
-        "registry": "http://172.17.0.3:8081/repository/vmt-internal/"
+        "registry": "http://46.101.155.92:8081/repository/vmt-internal/"
     },
     "scripts": {
         "serve:coverage": "live-server --port=1234 coverage",
         "build": "gulp clean && tsc -p tsconfig.json",
-        "test": "nyc mocha --require babel-register test/**/*.spec.js",
-        "lint": "echo \"Skip linting for build pipeline\" && exit 0"
+        "test": "JUNIT_REPORT_PATH=./junit/report.xml nyc mocha --colors --require babel-register --reporter mocha-jenkins-reporter test/**/*.spec.js"
     },
     "keywords": [],
     "author": "Navid Nikpour <navid@nikpour.com>",
@@ -35,6 +34,7 @@
         "del": "^3.0.0",
         "live-server": "^1.2.0",
         "mocha": "^4.0.1",
+        "mocha-jenkins-reporter": "^0.3.10",
         "nyc": "^11.3.0",
         "sinon-chai": "^2.14.0",
         "typescript": "^2.6.1"
