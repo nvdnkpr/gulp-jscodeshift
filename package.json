@@ -9,7 +9,8 @@
     "scripts": {
         "serve:coverage": "live-server --port=1234 coverage",
         "build": "gulp clean && tsc -p tsconfig.json",
-        "test": "nyc mocha --require babel-register test/**/*.spec.js"
+        "test": "nyc mocha --require babel-register test/**/*.spec.js",
+        "lint": ""
     },
     "keywords": [],
     "author": "Navid Nikpour <navid@nikpour.com>",
