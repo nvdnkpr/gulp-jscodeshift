@@ -28,6 +28,7 @@
         "@types/node": "^8.0.47",
         "@types/sinon-chai": "^2.7.29",
         "@types/through2": "^2.0.33",
+        "@vmt/nyc-config": "^0.1.0",
         "babel-preset-es2015": "^6.24.1",
         "babel-register": "^6.26.0",
         "chai": "^4.1.2",
@@ -40,34 +41,6 @@
         "typescript": "^2.6.1"
     },
     "nyc": {
-        "check-coverage": true,
-        "per-file": true,
-        "watermarks": {
-            "lines": [
-                80,
-                95
-            ],
-            "statements": [
-                80,
-                95
-            ],
-            "functions": [
-                80,
-                95
-            ],
-            "branches": [
-                80,
-                95
-            ]
-        },
-        "reporter": [
-            "lcov",
-            "html",
-            "text-summary"
-        ],
-        "exclude": [
-            "**/*.spec.js",
-            "dist"
-        ]
+      "extends": "@vmt/nyc-config"
     }
 }
