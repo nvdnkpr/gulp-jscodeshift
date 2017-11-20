@@ -1,0 +1,2 @@
+@Library('SharedLibraries') _
+npmBuild()

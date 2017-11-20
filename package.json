@@ -1,22 +1,46 @@
 {
-  "name": "gulp-jscodeshift",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "gulp test"
-  },
-  "keywords": [],
-  "author": "Navid Nikpour <navid@nikpour.com>",
-  "license": "ISC",
-  "dependencies": {
-    "gulp": "^3.9.1",
-    "gulp-copy": "^1.0.1",
-    "jscodeshift": "^0.3.32",
-    "lodash": "^4.17.4"
-  },
-  "devDependencies": {
-    "del": "^3.0.0",
-    "gulp-nodeunit": "^0.1.0"
-  }
+    "name": "gulp-jscodeshift",
+    "version": "0.1.0",
+    "description": "",
+    "main": "index.js",
+    "publishConfig": {
+        "registry": "http://46.101.155.92:8081/repository/vmt-internal/"
+    },
+    "scripts": {
+        "serve:coverage": "live-server --port=1234 coverage",
+        "build": "gulp clean && tsc -p tsconfig.json",
+        "test": "JUNIT_REPORT_PATH=./junit/report.xml nyc mocha --colors --require babel-register --reporter mocha-jenkins-reporter test/**/*.spec.js"
+    },
+    "keywords": [],
+    "author": "Navid Nikpour <navid@nikpour.com>",
+    "license": "ISC",
+    "dependencies": {
+        "gulp": "^3.9.1",
+        "gulp-util": "^3.0.8",
+        "jscodeshift": "^0.3.32"
+    },
+    "devDependencies": {
+        "@types/chai": "^4.0.4",
+        "@types/gulp": "^4.0.5",
+        "@types/gulp-util": "^3.0.33",
+        "@types/lodash": "^4.14.80",
+        "@types/mocha": "^2.2.44",
+        "@types/node": "^8.0.47",
+        "@types/sinon-chai": "^2.7.29",
+        "@types/through2": "^2.0.33",
+        "@vmt/nyc-config": "^0.1.0",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-register": "^6.26.0",
+        "chai": "^4.1.2",
+        "del": "^3.0.0",
+        "live-server": "^1.2.0",
+        "mocha": "^4.0.1",
+        "mocha-jenkins-reporter": "^0.3.10",
+        "nyc": "^11.3.0",
+        "sinon-chai": "^2.14.0",
+        "typescript": "^2.6.1"
+    },
+    "nyc": {
+      "extends": "@vmt/nyc-config"
+    }
 }
