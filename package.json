@@ -2,8 +2,8 @@
     "name": "gulp-jscodeshift",
     "version": "0.2.0",
     "description": "",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "dist/lib/jscodeshift.js",
+    "types": "dist/lib/jscodeshift.d.ts",
     "scripts": {
         "serve:coverage": "live-server --port=1234 coverage",
         "build": "gulp clean && tsc -p tsconfig.json",
