@@ -1,6 +1,18 @@
+# dependencies
 node_modules
+
+# sources
 src
 test
-.nyc-output
+gulpfile.js
+tsconfig.json
+
+# configuration files
+.babelrc
+.buildfile
 .idea
+.gitignore
+
+# coverage files
 coverage
+.nyc_output
