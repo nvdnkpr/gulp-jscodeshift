@@ -1,6 +1,6 @@
 {
     "name": "gulp-jscodeshift",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -38,15 +38,34 @@
         "typescript": "^2.6.1"
     },
     "nyc": {
-      "check-coverage": true,
-      "per-file": true,
-      "watermarks": {
-        "lines": [80, 95],
-        "statements": [80, 95],
-        "functions": [80, 95],
-        "branches": [80, 95]
-      },
-      "reporter": ["lcov", "html", "text-summary"],
-      "exclude": ["**/*.spec.js", "dist"]
+        "check-coverage": true,
+        "per-file": true,
+        "watermarks": {
+            "lines": [
+                80,
+                95
+            ],
+            "statements": [
+                80,
+                95
+            ],
+            "functions": [
+                80,
+                95
+            ],
+            "branches": [
+                80,
+                95
+            ]
+        },
+        "reporter": [
+            "lcov",
+            "html",
+            "text-summary"
+        ],
+        "exclude": [
+            "**/*.spec.js",
+            "dist"
+        ]
     }
 }
