@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import { File, PluginError } from 'gulp-util';
 
 
-import jsCodeshift from '../lib';
+import jsCodeshift from '../lib/jscodeshift';
 
 describe('codeshift', () => {
     it('should throw error when called with no transform file', () => {
