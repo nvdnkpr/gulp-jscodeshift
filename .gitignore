@@ -121,7 +121,7 @@ typings/
 .env
 
 # generated lib files
-/lib
+/dist
 
 /index.js
 /index.js*
