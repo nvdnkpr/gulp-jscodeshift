@@ -3,17 +3,20 @@ import { resolve } from 'path';
 import { existsSync } from 'fs';
 
 // 3rd party, alphabetic order
-import * as gutil from 'gulp-util'
-import { defaults } from 'lodash'; // import * as _ from 'lodash';
+import * as gutil from 'gulp-util';
+import { defaults } from 'lodash'; 
 import * as through from 'through2';
+import { Stream } from 'stream';
 
-import * as jscodeshift from 'jscodeshift'
+
+const jscodeshift:any = require('jscodeshift');
+
 
 // Consts
 const PLUGIN_NAME = 'gulp-jscodeshift';
 
 // Plugin level function(dealing with files)
-export default function jsCodeshift(transformFilePath) {
+export default function jsCodeshift(transformFilePath:any):Stream {
   if (!transformFilePath) {
     throw new gutil.PluginError(PLUGIN_NAME, 'Missing path to transform file!');
   }
