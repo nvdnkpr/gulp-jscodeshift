@@ -2,10 +2,20 @@
     "compilerOptions": {
         "target": "es5",
         "outDir": ".",
+        "declarationDir": ".",
+        "declaration": true,
         "rootDir": "./src",
         "sourceMap": true,
         "module": "commonjs",
-        "noEmitOnError": true
+        "noEmitOnError": true,
+        "strict": true,
+        "typeRoots": [
+          "./node_modules/@types",
+          "./@types"
+        ],
+        "types":[
+          "jscodeshift"
+        ]
     },
     "include": [
         "src/**/*"
