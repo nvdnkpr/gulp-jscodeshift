@@ -16,7 +16,7 @@ const jscodeshift:any = require('jscodeshift');
 const PLUGIN_NAME = 'gulp-jscodeshift';
 
 // Plugin level function(dealing with files)
-export default function jsCodeshift(transformFilePath:any):Stream {
+export default function jsCodeshift(transformFilePath:any, options:any):Stream {
   if (!transformFilePath) {
     throw new gutil.PluginError(PLUGIN_NAME, 'Missing path to transform file!');
   }
@@ -28,8 +28,9 @@ export default function jsCodeshift(transformFilePath:any):Stream {
   return through.obj((file, encoding, callback) => {
     const transform: any = require(resolve(transformFilePath));
     const out = transform(
-      { file: file.path, source: file.contents.toString() },
-      { j: jscodeshift, jscodeshift }
+      { path: file.path, source: file.contents.toString() },
+      { j: jscodeshift, jscodeshift },
+      options
     );
 
     file.contents = new Buffer(out);
