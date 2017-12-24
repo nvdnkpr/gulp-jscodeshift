@@ -15,7 +15,7 @@ describe('codeshift', () => {
     });
 
     it('should transform correctly', (done) => {
-        const jscodeshiftStream = jsCodeshift('./test/transforms/reverse-transform.js', {});
+        const jscodeshiftStream = jsCodeshift('./test/transforms/reverse-transform.js');
 
         jscodeshiftStream.on('error', done);
         jscodeshiftStream.on('data', (file) => {
@@ -31,5 +31,23 @@ describe('codeshift', () => {
         }));
         jscodeshiftStream.end()
     });
+
+    it('should transform correctly with options', (done) => {
+      const jscodeshiftStream = jsCodeshift('./test/transforms/reverse-transform.js', {prepend: 'abc_'});
+
+      jscodeshiftStream.on('error', done);
+      jscodeshiftStream.on('data', (file) => {
+          expect(file).to.exist;
+          expect(file.path).to.equal('./test/fixtures/code.input.js');
+          expect(file.contents.toString()).to.equal(fs.readFileSync('./test/fixtures/code-prepend.output.js', 'utf8'));
+          done();
+      });
+
+      jscodeshiftStream.write(new File({
+          path: './test/fixtures/code.input.js',
+          contents: fs.readFileSync('./test/fixtures/code.input.js')
+      }));
+      jscodeshiftStream.end()
+  });
 
 });
