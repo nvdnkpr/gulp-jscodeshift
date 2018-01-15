@@ -1,44 +1,77 @@
 // internal from node, alphabetic order
-import { resolve } from 'path';
+import { resolve, join } from 'path';
 import { existsSync } from 'fs';
 
 // 3rd party, alphabetic order
 import * as gutil from 'gulp-util';
 import { defaults } from 'lodash'; 
 import * as through from 'through2';
-import { Stream } from 'stream';
-
+import { Stream, Transform } from 'stream';
 
 const jscodeshift:any = require('jscodeshift');
-
 
 // Consts
 const PLUGIN_NAME = 'gulp-jscodeshift';
 
+
+export interface CodeShiftOptions {
+  flushFile?: null | string;
+  transformOptions?: any;
+  extensions?: [Function]
+}
+
+const defaultOptions:CodeShiftOptions = {
+  flushFile: null
+};
+
 // Plugin level function(dealing with files)
-export default function jsCodeshift(transformFilePath:any, options:any):Stream {
-  if (!transformFilePath) {
-    throw new gutil.PluginError(PLUGIN_NAME, 'Missing path to transform file!');
-  }
+export function jsCodeshift(transformFilePath:any, options?:CodeShiftOptions):Transform {
+  const _options:any = { ...defaultOptions, ...options};
 
   if (!existsSync(resolve(transformFilePath))) {
     throw new gutil.PluginError(PLUGIN_NAME, `Transform file ${transformFilePath} does not exist`);
   }
-  // Creating a stream through which each file will pass
-  return through.obj((file, encoding, callback) => {
+  const flushOutput:any[] = [];
+  let latestFile:gutil.File;
+
+  if (_options.extensions){
+    _options.extensions.forEach((extension:Function) => extension(jscodeshift));
+  }
+  
+  const transformFunction = (file:gutil.File, encoding:string, cb:Function) => {
+    let output;
     const transform: any = require(resolve(transformFilePath));
-    const out = transform(
-      { path: file.path, source: file.contents.toString() },
-      { j: jscodeshift, jscodeshift },
-      options
-    );
+    if (file.contents){
+      output = transform(
+        { path: file.path, source: file.contents.toString() },
+        { j: jscodeshift, jscodeshift },
+        _options.transformOptions
+      ); 
+      latestFile = file;
+    }
 
-    file.contents = new Buffer(out);
-    // wrap in new Buffer ?
-    callback(null, file);
-    // jscodeshiftRunner.run(path.resolve(_opts.transform), [file.path], _opts).then(() => cb(null), () => cb(false));
-  });
+    if (_options.flushFile){
+      // set latest file if not already set, or if the current file was modified more recently.
+      latestFile = file;
+      flushOutput.push(output);
+      cb(null);
+    } else {
+      file.contents = new Buffer(output);
+      cb(null, file);
+    }
+  };
+
+  const flushFunction = (cb:Function) => {
+    let flushFile:gutil.File;
+
+    flushFile = latestFile.clone({contents: false});
+    flushFile.path = join(latestFile.base, _options.flushFile);
+
+    flushFile.contents = new Buffer(flushOutput.join(''));
+    
+    cb(null, flushFile);
+  }
+
+  // Creating a stream through which each file will pass
+  return _options.flushFile ? through.obj(transformFunction, flushFunction) : through.obj(transformFunction);
 }
-
-// Exporting the plugin main function
-module.exports = jsCodeshift;
