@@ -1,27 +1,24 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "outDir": "dist",
-        "declarationDir": "dist",
-        "declaration": true,
-        "rootDir": "./src",
-        "sourceMap": true,
-        "module": "commonjs",
-        "noEmitOnError": true,
-        "strict": true,
-        "typeRoots": [
-          "./node_modules/@types",
-          "./src/@types"
-        ],
-        "types":[
-          "jscodeshift"
-        ]
-    },
-    "include": [
-        "src/**/*"
-    ],
-    "exclude": [
-        "node_modules",
-        "**/*.spec.ts"
+  "compilerOptions": {
+    "target": "es5",
+    "outDir": "dist",
+    "declarationDir": "dist",
+    "declaration": true,
+    "rootDir": ".",
+    "sourceMap": true,
+    "module": "commonjs",
+    "noEmitOnError": true,
+    "strict": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/@types"
     ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/test/**/*"
+  ]
 }
